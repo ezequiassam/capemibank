@@ -1,5 +1,6 @@
 package com.capgemini.bank.capemibank.model;
 
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,9 @@ public class ContaCorrente {
     private Long id;
 
     private Long saldo = 0L;
+
+    @Column(unique = true)
+    private String numeroConta;
 
     @OneToMany(
             cascade = CascadeType.ALL,

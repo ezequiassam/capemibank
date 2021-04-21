@@ -9,6 +9,14 @@ import java.util.Date;
 @Table(name = "historicobancario")
 public class HistoricoBancario {
 
+    public HistoricoBancario() {
+    }
+
+    public HistoricoBancario(OperacaoBancaria operacaoBancaria, Date dataOperacao) {
+        this.operacaoBancaria = operacaoBancaria;
+        this.dataOperacao = dataOperacao;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,6 +26,7 @@ public class HistoricoBancario {
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @Temporal(TemporalType.DATE)
     private Date dataOperacao;
+
 
     public Long getId() {
         return id;
