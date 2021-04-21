@@ -14,7 +14,10 @@ public class ContaCorrente {
 
     private Long saldo = 0L;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<HistoricoBancario> historicoBancario = new ArrayList<>();
 
     public Long getId() {

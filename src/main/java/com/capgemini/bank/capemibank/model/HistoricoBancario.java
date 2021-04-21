@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "historicobancario")
 public class HistoricoBancario {
 
     @Id
@@ -13,9 +15,27 @@ public class HistoricoBancario {
 
     private OperacaoBancaria operacaoBancaria;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @Temporal(TemporalType.DATE)
     private Date dataOperacao;
 
+    public Long getId() {
+        return id;
+    }
 
+    public OperacaoBancaria getOperacaoBancaria() {
+        return operacaoBancaria;
+    }
+
+    public void setOperacaoBancaria(OperacaoBancaria operacaoBancaria) {
+        this.operacaoBancaria = operacaoBancaria;
+    }
+
+    public Date getDataOperacao() {
+        return dataOperacao;
+    }
+
+    public void setDataOperacao(Date dataOperacao) {
+        this.dataOperacao = dataOperacao;
+    }
 }
