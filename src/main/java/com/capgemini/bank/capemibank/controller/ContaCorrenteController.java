@@ -8,7 +8,11 @@ import com.capgemini.bank.capemibank.service.ContaCorrenteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/capemibank/conta")
@@ -47,4 +51,33 @@ public class ContaCorrenteController {
     }
 
 
+    @ExceptionHandler({ContaCorrenteNaoEncotradaException.class})
+    public ResponseEntity<Error> handleContaCorrenteNaoEncotradaException(ContaCorrenteNaoEncotradaException e) {
+        return new ResponseEntity<>(new Error(e), HttpStatus.NOT_FOUND);
+    }
+
+    class Error {
+        private final List<ModelMap> errors;
+
+        public Error(Exception err) {
+            this.errors = getModelMap(err);
+        }
+
+        public Error(List<ModelMap> err) {
+            this.errors = err;
+        }
+
+        private List<ModelMap> getModelMap(Exception error) {
+            List<ModelMap> list = new ArrayList<>();
+            ModelMap map = new ModelMap();
+            map.put("defaultMessage", error.getMessage());
+            map.put("tipo", true);
+            list.add(map);
+            return list;
+        }
+
+        public List<ModelMap> getErrors() {
+            return errors;
+        }
+    }
 }
