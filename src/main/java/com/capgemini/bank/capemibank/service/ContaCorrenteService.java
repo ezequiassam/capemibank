@@ -5,6 +5,8 @@ import com.capgemini.bank.capemibank.model.ContaCorrente;
 
 public interface ContaCorrenteService {
 
+    public ContaCorrente findContaCorrente() throws ContaCorrenteNaoEncotradaException;
+
     public Long saldoBancario(ContaCorrente contaCorrente) throws ContaCorrenteNaoEncotradaException;
 
     public ContaCorrente depositoBancario(ContaCorrente contaCorrente, Long valorDoDeposito) throws ContaCorrenteNaoEncotradaException;

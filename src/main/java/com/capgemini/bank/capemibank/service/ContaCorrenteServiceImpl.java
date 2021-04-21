@@ -5,16 +5,28 @@ import com.capgemini.bank.capemibank.model.ContaCorrente;
 import com.capgemini.bank.capemibank.model.HistoricoBancario;
 import com.capgemini.bank.capemibank.model.OperacaoBancaria;
 import com.capgemini.bank.capemibank.persistence.ContaCorrenteRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Optional;
 
+@Service
 public class ContaCorrenteServiceImpl implements ContaCorrenteService {
 
     private ContaCorrenteRepository provider;
 
     public ContaCorrenteServiceImpl(ContaCorrenteRepository provider) {
         this.provider = provider;
+    }
+
+
+    @Override
+    public ContaCorrente findContaCorrente() throws ContaCorrenteNaoEncotradaException {
+        Iterable<ContaCorrente> contasCorrentes = provider.findAll();
+        if (contasCorrentes == null || !contasCorrentes.iterator().hasNext()) {
+            throw new ContaCorrenteNaoEncotradaException("Nenhuma conta corrente foi localizada");
+        }
+        return contasCorrentes.iterator().next();
     }
 
     @Override
