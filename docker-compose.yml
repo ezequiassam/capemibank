@@ -1,8 +1,6 @@
 version: "3.7"
 services:
   api_service:
-    image: openjdk:8-jdk-alpine
-    container_name: capemibank
     build: .
     restart: always
     ports:
@@ -17,6 +15,6 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_DB: pgbank
+      POSTGRES_DB: pgdb
       POSTGRES_USER: pguser
-      POSTGRES_PASSWORD: pgdb
+      POSTGRES_PASSWORD: pgpass
