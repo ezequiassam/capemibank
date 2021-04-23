@@ -1,16 +1,16 @@
 version: "3.7"
 services:
-  api_service:
-    restart: always
-    build: ./app
-    working_dir: /app
-    volumes:
-      - ./app:/app
-    ports:
-      - 8080:8080
-    command: mvn clean spring-boot:run
-    depends_on:
-      - postgres_db
+#  api_service:
+#    restart: always
+#    build: ./app
+#    working_dir: /app
+#    volumes:
+#      - ./app:/app
+#    ports:
+#      - 8080:8080
+#    command: mvn clean spring-boot:run
+#    depends_on:
+#      - postgres_db
   postgres_db:
     image: "postgres:11.4"
     restart: always

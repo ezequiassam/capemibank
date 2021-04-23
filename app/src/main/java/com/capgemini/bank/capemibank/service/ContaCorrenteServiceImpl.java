@@ -22,6 +22,10 @@ public class ContaCorrenteServiceImpl implements ContaCorrenteService {
 
     @Override
     public ContaCorrente findContaCorrente() throws ContaCorrenteNaoEncotradaException {
+        Optional<ContaCorrente> providerById = provider.findById(1L);
+        if (providerById.isPresent()){
+            return providerById.get();
+        }
         Iterable<ContaCorrente> contasCorrentes = provider.findAll();
         if (contasCorrentes == null || !contasCorrentes.iterator().hasNext()) {
             throw new ContaCorrenteNaoEncotradaException("Nenhuma conta corrente foi localizada");
@@ -33,13 +37,14 @@ public class ContaCorrenteServiceImpl implements ContaCorrenteService {
     public Double saldoBancario(ContaCorrente contaCorrente) throws ContaCorrenteNaoEncotradaException {
         ContaCorrente conta = getConta(contaCorrente);
         registrarOperacao(conta, OperacaoBancaria.SALDO);
+        provider.save(conta);
         return conta.getSaldo();
     }
 
     @Override
     public ContaCorrente depositoBancario(ContaCorrente contaCorrente, Double valorDoDeposito) throws ContaCorrenteNaoEncotradaException {
         ContaCorrente conta = getConta(contaCorrente);
-        conta.setSaldo(valorDoDeposito);
+        conta.setSaldo(conta.getSaldo() + valorDoDeposito);
         conta = registrarOperacao(conta, OperacaoBancaria.DEPOSITO);
         provider.save(conta);
         return conta;
@@ -48,7 +53,7 @@ public class ContaCorrenteServiceImpl implements ContaCorrenteService {
     @Override
     public ContaCorrente saqueBancario(ContaCorrente contaCorrente, Double valorDoSaque) throws ContaCorrenteNaoEncotradaException {
         ContaCorrente conta = getConta(contaCorrente);
-        Double saldoRestante = valorDoSaque - conta.getSaldo();
+        Double saldoRestante = conta.getSaldo() - valorDoSaque;
         conta.setSaldo(saldoRestante);
         conta = registrarOperacao(conta, OperacaoBancaria.SAQUE);
         provider.save(conta);

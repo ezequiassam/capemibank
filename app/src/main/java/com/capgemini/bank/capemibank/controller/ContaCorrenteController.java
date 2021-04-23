@@ -12,7 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/capemibank/conta")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ContaCorrenteController {
 
     @Autowired
@@ -35,13 +35,13 @@ public class ContaCorrenteController {
         return new ResponseEntity<>(saldoBancario, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/depositar/{valor}", produces = "application/json")
+    @PostMapping(value = "/depositar/{valor}", produces = "application/json")
     public ResponseEntity<ContaCorrente> depositar(@PathVariable("valor") Double valorDeposito, @RequestBody ContaCorrente contaCorrente) throws ContaCorrenteNaoEncotradaException {
         ContaCorrente conta = service.depositoBancario(contaCorrente, valorDeposito);
         return new ResponseEntity<>(conta, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/saque/{valor}", produces = "application/json")
+    @PostMapping(value = "/saque/{valor}", produces = "application/json")
     public ResponseEntity<ContaCorrente> sacar(@PathVariable("valor") Double valorSaque, @RequestBody ContaCorrente contaCorrente) throws ContaCorrenteNaoEncotradaException {
         ContaCorrente conta = service.saqueBancario(contaCorrente, valorSaque);
         return new ResponseEntity<>(conta, HttpStatus.CREATED);
