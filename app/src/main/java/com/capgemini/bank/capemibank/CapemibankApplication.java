@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 
 @SpringBootApplication
@@ -22,7 +23,7 @@ public class CapemibankApplication {
     @Bean
     CommandLineRunner init(ContaCorrenteRepository contaCorrenteRepository) {
         ContaCorrente contaCorrente = new ContaCorrente();
-        contaCorrente.setHistoricoBancario(Arrays.asList(new HistoricoBancario(OperacaoBancaria.ABERTURA, new Date())));
+        contaCorrente.setHistoricoBancario(Arrays.asList(new HistoricoBancario(OperacaoBancaria.ABERTURA, Calendar.getInstance().getTime())));
         contaCorrenteRepository.save(contaCorrente);
         return args -> {
             contaCorrenteRepository.findById(contaCorrente.getId()).get();

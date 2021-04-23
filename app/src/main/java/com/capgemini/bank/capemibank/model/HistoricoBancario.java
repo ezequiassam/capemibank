@@ -23,7 +23,7 @@ public class HistoricoBancario {
 
     private OperacaoBancaria operacaoBancaria;
 
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.DATE)
     private Date dataOperacao;
 

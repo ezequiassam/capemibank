@@ -7,6 +7,7 @@ import com.capgemini.bank.capemibank.model.OperacaoBancaria;
 import com.capgemini.bank.capemibank.persistence.ContaCorrenteRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
@@ -66,7 +67,7 @@ public class ContaCorrenteServiceImpl implements ContaCorrenteService {
     }
 
     private ContaCorrente registrarOperacao(ContaCorrente contaCorrente, OperacaoBancaria operacaoBancaria) {
-        contaCorrente.getHistoricoBancario().add(new HistoricoBancario(operacaoBancaria, new Date()));
+        contaCorrente.getHistoricoBancario().add(new HistoricoBancario(operacaoBancaria, Calendar.getInstance().getTime()));
         return contaCorrente;
     }
 }

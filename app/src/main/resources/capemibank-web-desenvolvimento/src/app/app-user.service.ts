@@ -17,7 +17,7 @@ export class AppUserService {
   };
 
   constructor(private http: HttpClient) {
-    this.routerURL = "http://localhost:8080"
+    this.routerURL = "http://localhost:8080/conta"
   }
 
   public find(): Observable<Conta> {

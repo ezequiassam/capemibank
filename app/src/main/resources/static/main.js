@@ -34,7 +34,7 @@ class AppUserService {
                 'Access-Control-Allow-Origin': '*',
             }
         };
-        this.routerURL = "http://localhost:8080";
+        this.routerURL = "http://localhost:8080/conta";
     }
     find() {
         return this.http.get(this.routerURL);
