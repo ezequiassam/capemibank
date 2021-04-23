@@ -6,7 +6,7 @@ import com.capgemini.bank.capemibank.model.OperacaoBancaria;
 import com.capgemini.bank.capemibank.persistence.ContaCorrenteRepository;
 import com.capgemini.bank.capemibank.service.ContaCorrenteService;
 import com.capgemini.bank.capemibank.service.ContaCorrenteServiceImpl;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -29,8 +29,8 @@ abstract class CapemibankApplicationTests {
     protected ContaCorrente contaCorrenteMock;
 
 
-    @Test
-    void contextLoads() {
+    @BeforeEach
+    void init() {
         contaCorrenteAbstract = new ContaCorrente();
         contaCorrenteAbstract.setHistoricoBancario(Arrays.asList(new HistoricoBancario(OperacaoBancaria.ABERTURA, new Date())));
 
@@ -40,4 +40,5 @@ abstract class CapemibankApplicationTests {
 
         contaCorrenteMock = Mockito.mock(ContaCorrente.class);
     }
+
 }
