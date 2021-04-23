@@ -13,7 +13,7 @@ public class ContaCorrente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long saldo = 0L;
+    private Double saldo = 0D;
 
     @Column(unique = true)
     private String numeroConta;
@@ -28,11 +28,11 @@ public class ContaCorrente {
         return id;
     }
 
-    public Long getSaldo() {
+    public Double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(Long saldo) {
+    public void setSaldo(Double saldo) {
         this.saldo = saldo;
     }
 

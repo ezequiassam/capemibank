@@ -30,14 +30,14 @@ public class ContaCorrenteServiceImpl implements ContaCorrenteService {
     }
 
     @Override
-    public Long saldoBancario(ContaCorrente contaCorrente) throws ContaCorrenteNaoEncotradaException {
+    public Double saldoBancario(ContaCorrente contaCorrente) throws ContaCorrenteNaoEncotradaException {
         ContaCorrente conta = getConta(contaCorrente);
         registrarOperacao(conta, OperacaoBancaria.SALDO);
         return conta.getSaldo();
     }
 
     @Override
-    public ContaCorrente depositoBancario(ContaCorrente contaCorrente, Long valorDoDeposito) throws ContaCorrenteNaoEncotradaException {
+    public ContaCorrente depositoBancario(ContaCorrente contaCorrente, Double valorDoDeposito) throws ContaCorrenteNaoEncotradaException {
         ContaCorrente conta = getConta(contaCorrente);
         conta.setSaldo(valorDoDeposito);
         conta = registrarOperacao(conta, OperacaoBancaria.DEPOSITO);
@@ -46,9 +46,9 @@ public class ContaCorrenteServiceImpl implements ContaCorrenteService {
     }
 
     @Override
-    public ContaCorrente saqueBancario(ContaCorrente contaCorrente, Long valorDoSaque) throws ContaCorrenteNaoEncotradaException {
+    public ContaCorrente saqueBancario(ContaCorrente contaCorrente, Double valorDoSaque) throws ContaCorrenteNaoEncotradaException {
         ContaCorrente conta = getConta(contaCorrente);
-        Long saldoRestante = valorDoSaque - conta.getSaldo();
+        Double saldoRestante = valorDoSaque - conta.getSaldo();
         conta.setSaldo(saldoRestante);
         conta = registrarOperacao(conta, OperacaoBancaria.SAQUE);
         provider.save(conta);

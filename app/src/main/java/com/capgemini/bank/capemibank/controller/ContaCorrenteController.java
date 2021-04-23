@@ -11,11 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @RestController
 @RequestMapping("/capemibank/conta")
 public class ContaCorrenteController {
@@ -35,19 +30,19 @@ public class ContaCorrenteController {
     }
 
     @PostMapping(value = "/saldo", produces = "application/json")
-    public ResponseEntity<Long> saldo(@RequestBody ContaCorrente contaCorrente) throws ContaCorrenteNaoEncotradaException {
-        Long saldoBancario = service.saldoBancario(contaCorrente);
+    public ResponseEntity<Double> saldo(@RequestBody ContaCorrente contaCorrente) throws ContaCorrenteNaoEncotradaException {
+        Double saldoBancario = service.saldoBancario(contaCorrente);
         return new ResponseEntity<>(saldoBancario, HttpStatus.OK);
     }
 
     @PutMapping(value = "/depositar/{valor}", produces = "application/json")
-    public ResponseEntity<ContaCorrente> depositar(@PathVariable("valor") Long valorDeposito, @RequestBody ContaCorrente contaCorrente) throws ContaCorrenteNaoEncotradaException {
+    public ResponseEntity<ContaCorrente> depositar(@PathVariable("valor") Double valorDeposito, @RequestBody ContaCorrente contaCorrente) throws ContaCorrenteNaoEncotradaException {
         ContaCorrente conta = service.depositoBancario(contaCorrente, valorDeposito);
         return new ResponseEntity<>(conta, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/saque/{valor}", produces = "application/json")
-    public ResponseEntity<ContaCorrente> sacar(@PathVariable("valor") Long valorSaque, @RequestBody ContaCorrente contaCorrente) throws ContaCorrenteNaoEncotradaException {
+    public ResponseEntity<ContaCorrente> sacar(@PathVariable("valor") Double valorSaque, @RequestBody ContaCorrente contaCorrente) throws ContaCorrenteNaoEncotradaException {
         ContaCorrente conta = service.saqueBancario(contaCorrente, valorSaque);
         return new ResponseEntity<>(conta, HttpStatus.CREATED);
     }
