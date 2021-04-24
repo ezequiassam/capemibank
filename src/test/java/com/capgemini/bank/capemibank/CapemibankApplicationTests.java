@@ -8,12 +8,11 @@ import com.capgemini.bank.capemibank.service.ContaCorrenteService;
 import com.capgemini.bank.capemibank.service.ContaCorrenteServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
@@ -22,9 +21,11 @@ import static org.mockito.Mockito.when;
 abstract class CapemibankApplicationTests {
 
     @MockBean
-    protected static ContaCorrenteRepository contaRepository;
+    protected ContaCorrenteRepository contaRepository;
 
+    @Autowired
     protected ContaCorrenteService service;
+
     protected ContaCorrente contaCorrenteAbstract;
     protected ContaCorrente contaCorrenteMock;
 
@@ -32,7 +33,9 @@ abstract class CapemibankApplicationTests {
     @BeforeEach
     void init() {
         contaCorrenteAbstract = new ContaCorrente();
-        contaCorrenteAbstract.setHistoricoBancario(Arrays.asList(new HistoricoBancario(OperacaoBancaria.ABERTURA, new Date())));
+        List<HistoricoBancario> hist = new ArrayList<>();
+        hist.add(new HistoricoBancario(OperacaoBancaria.ABERTURA, new Date()));
+        contaCorrenteAbstract.setHistoricoBancario(hist);
 
         when(contaRepository.findById(anyLong())).thenReturn(Optional.of(contaCorrenteAbstract));
 

@@ -17,7 +17,7 @@ public class ContaCorrenteServiceTest extends CapemibankApplicationTests {
     public void findContaCorrente() {
         when(contaRepository.findAll()).thenReturn(Arrays.asList(contaCorrenteAbstract));
         service.findContaCorrente();
-        verify(contaRepository).findAll();
+        verify(contaRepository).findById(1L);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class ContaCorrenteServiceTest extends CapemibankApplicationTests {
 
     @Test
     public void saqueBancario() {
-        contaCorrenteAbstract.setSaldo(3000.0);
+        contaCorrenteAbstract.setSaldo(3001.0);
         ContaCorrente contaRetornada = service.saqueBancario(contaCorrenteMock, 1000.50);
         verify(contaRepository).findById(anyLong());
         verify(contaRepository).save(contaCorrenteAbstract);
