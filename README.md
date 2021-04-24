@@ -1,6 +1,8 @@
 # Capemibank
 
-O [Capemibank](/#) é o melhor sistema para gerenciar a sua conta bancária. Esse projeto faz parte do desafio Capgemini.
+O [Capemibank](/#) é o melhor sistema para gerenciar a sua conta bancária. Esse projeto faz parte do desafio Capgemini. 
+
+O projeto foi escrito na versão 8 do Java utilizando o framework String-Boot com uma arquitetura MVC(Model View Controller) para a contrução da API REST. O simples Front-end utilizado no projeto foi contruído com Angular. 
 
 ## Instalação
 Linux & Windows
