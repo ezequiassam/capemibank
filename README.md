@@ -6,7 +6,7 @@ O [Capemibank](/#) é o melhor sistema para gerenciar a sua conta bancária. Ess
 Linux & Windows
 - Dentro do diretório do projeto execute o seguinte comando para iniciar o banco de dados:
 ```sh
-docker-compose up
+docker-compose up -d
 ```
 - Em seguida execute o comando para iniciar a aplicação:
 ```sh
